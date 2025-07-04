@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mysql
+  labels:
+    app: mysql
+spec:
+  containers:
+    - name: mysql
+      image: 894144679553.dkr.ecr.us-east-1.amazonaws.com/clo835-mysql:latest
+      ports:
+        - containerPort: 3306
+  imagePullSecrets:
+    - name: regcred
