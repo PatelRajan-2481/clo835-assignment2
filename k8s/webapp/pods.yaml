@@ -3,12 +3,26 @@ kind: Pod
 metadata:
   name: webapp
   labels:
-    app: webapp
+    app: employees
 spec:
+  imagePullSecrets:
+    - name: regcred
   containers:
     - name: webapp
       image: 894144679553.dkr.ecr.us-east-1.amazonaws.com/clo835-webapp:latest
       ports:
         - containerPort: 8080
-  imagePullSecrets:
-    - name: regcred
+      env:
+        - name: DBHOST
+          value: "mysql"  # This assumes both pods are in the same namespace
+        - name: DBUSER
+          value: "root"
+        - name: DBPWD
+          value: "password"
+        - name: DATABASE
+          value: "employees"
+        - name: DBPORT
+          value: "3306"
+        - name: APP_COLOR
+          value: "lime"
+
