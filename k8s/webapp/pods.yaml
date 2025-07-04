@@ -2,8 +2,9 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: webapp
+  namespace: webapp
   labels:
-    app: employees
+    app: webapp
 spec:
   imagePullSecrets:
     - name: regcred
@@ -14,7 +15,7 @@ spec:
         - containerPort: 8080
       env:
         - name: DBHOST
-          value: "mysql"  # This assumes both pods are in the same namespace
+          value: "mysql-service.mysql.svc.cluster.local" #Internal DNS to access MYSQL Service
         - name: DBUSER
           value: "root"
         - name: DBPWD
@@ -25,4 +26,3 @@ spec:
           value: "3306"
         - name: APP_COLOR
           value: "lime"
-
